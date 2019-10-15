@@ -1,0 +1,15 @@
+version: 2.1
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
+     # start proprietary DB using private Docker image
+     # with credentials stored in the UI
+     - run: docker login -u xiar -p AaBb@123456
+
+     # build the application image
+     - run: docker build -t xiar/sentiment-analysis-web-app .
+
+     # deploy the image
+     - run: docker push xiar/sentiment-analysis-web-app
